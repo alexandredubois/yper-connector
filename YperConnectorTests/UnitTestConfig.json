@@ -1,0 +1,7 @@
+{
+  "credentials": {
+    "appId": "YourAppIdHere",
+    "appSecret": "YourAppSecretHere",
+    "environment" :  "sandbox" //sandbox or production
+  }
+}
