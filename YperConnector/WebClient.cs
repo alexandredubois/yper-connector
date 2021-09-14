@@ -15,6 +15,7 @@ namespace YperConnector
         {
             _client = new HttpClient { BaseAddress = new Uri($"{environment.BaseUrl}") };
             _client.DefaultRequestHeaders.Add("User-Agent", "yper-connector");
+            _client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
 
         public void SetAuthorization(string token)
