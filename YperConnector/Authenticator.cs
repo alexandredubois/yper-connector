@@ -14,13 +14,17 @@ namespace YperConnector
 
         private readonly string _clientId;
         private readonly string _clientSecret;
+        private readonly string _proId;
+        private readonly string _proSecret;
 
-        public Authenticator(Environment environment, string apiClientId, string apiClientSecret)
+        public Authenticator(Environment environment, string apiClientId, string apiClientSecret, string apiProId, string apiProSecret)
         {
             _webClient = new WebClient(environment);
             _environment = environment;
             _clientId = apiClientId;
             _clientSecret = apiClientSecret;
+            _proId = apiProId;
+            _proSecret = apiProSecret;
         }
 
         public async Task<string> GetAccessToken()
@@ -38,8 +42,9 @@ namespace YperConnector
             {
                 ClientId = _clientId,
                 ClientSecret = _clientSecret,
-                Scope = "api",
-                GrantType = "client_credentials"
+                ProId = _proId,
+                ProSecret = _proSecret,
+                GrantType = "pro_secret_token"
             };
 
             var response = await _webClient.PostAsync("/oauth/token", tokenRequest).ConfigureAwait(false);

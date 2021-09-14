@@ -21,8 +21,10 @@ namespace YperConnectorTests
         {
             var clientId = _config.GetSection("credentials")["appId"];
             var clientSecret = _config.GetSection("credentials")["appSecret"];
+            var proId = _config.GetSection("credentials")["proId"];
+            var proSecret = _config.GetSection("credentials")["proSecret"];
             var environment = "production".Equals(_config.GetSection("credentials")["environment"]) ? Environment.Production : Environment.Sandbox;
-            var apiInstance = YperApi.Initialize(environment, clientId, clientSecret);
+            var apiInstance = YperApi.Initialize(environment, clientId, clientSecret, proId, proSecret);
         }
     }
 }

@@ -2,6 +2,8 @@
   "credentials": {
     "appId": "YourAppIdHere",
     "appSecret": "YourAppSecretHere",
-    "environment" :  "sandbox" //sandbox or production
+    "environment": "sandbox", //sandbox or production
+    "proId": "YourProIdHere",
+    "proSecret": "YourProSecretHere"
   }
 }
