@@ -15,6 +15,7 @@ namespace YperConnector
         {
             _client = new HttpClient { BaseAddress = new Uri($"{environment.BaseUrl}") };
             _client.DefaultRequestHeaders.Add("User-Agent", "yper-connector");
+            _client.DefaultRequestHeaders.Add("X-Request-Timestamp", Convert.ToString((int)DateTime.Now.Subtract(new DateTime(1970, 1, 1)).TotalSeconds));
             _client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
 
