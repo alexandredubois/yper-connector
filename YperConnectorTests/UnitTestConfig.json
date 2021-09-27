@@ -4,6 +4,7 @@
     "appSecret": "YourAppSecretHere",
     "environment": "sandbox", //sandbox or production
     "proId": "YourProIdHere",
-    "proSecret": "YourProSecretHere"
+    "proSecret": "YourProSecretHere",
+    "defautlRetailPoint": "YourDefaultRetailPointIdHere"
   }
 }
