@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using YperConnector.Models;
@@ -53,14 +54,14 @@ namespace YperConnector
             if (response.IsSuccessStatusCode)
                 tokenResponse = await response.Content.ReadAsAsync<TokenSuccessResponse>().ConfigureAwait(false);
             else
-                throw new HttpRequestException($"Access token request failed with message: {response.Content.ReadAsAsync<ErrorResponse>().Result.ErrorDescription}");
+                throw new HttpRequestException($"Access token request failed with message: {response.Content.ReadAsAsync<ErrorResponse>().Result.Message}");
 
             return new OAuth2AccessToken()
             {
-                AccessToken = tokenResponse.AccessToken,
-                ExpireDate = DateTime.UtcNow.AddMinutes(tokenResponse.ExpiresIn),
-                Scope = tokenResponse.Scope,
-                TokenType = tokenResponse.TokenType
+                AccessToken = tokenResponse.Result.AccessToken,
+                ExpireDate = DateTime.UtcNow.AddMinutes(tokenResponse.Result.ExpiresIn),
+                Scope = tokenResponse.Result.Scopes.FirstOrDefault(),
+                TokenType = tokenResponse.Result.TokenType
             };
         }
     }

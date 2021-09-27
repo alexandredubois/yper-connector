@@ -1,11 +1,11 @@
 ﻿using Newtonsoft.Json;
 
-namespace YperConnector.Models.Token
+namespace YperConnector.Models.Prebook.Response
 {
-    public class TokenSuccessResponse
+    public class PrebookResponse
     {
         [JsonProperty("result")]
-        public TokenResult Result { get; set; }
+        public Result Result { get; set; }
 
         [JsonProperty("status")]
         public int Status { get; set; }
