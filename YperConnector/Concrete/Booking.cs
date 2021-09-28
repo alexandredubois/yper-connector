@@ -1,13 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 using YperConnector.Abstract;
 using YperConnector.Models;
 using YperConnector.Models.Prebook.Request;
 using YperConnector.Models.Prebook.Response;
+using YperConnector.Models.PrebookValidation.Response;
 
 namespace YperConnector.Concrete
 {
@@ -45,6 +43,29 @@ namespace YperConnector.Concrete
                 throw new HttpRequestException($"{nameof(Prebook)} failed", e);
             }
             
+        }
+
+        public async Task<Result<PrebookValidationResponse>> ValidatePrebook(string prebookId)
+        {
+            try
+            {
+                var response = await _webClient.PostAsync($"/pro/{_proId}/prebook/{prebookId}/validate").ConfigureAwait(false);
+                var result = new Result<PrebookValidationResponse>();
+
+                if (response.IsSuccessStatusCode)
+                {
+                    result.Data = await response.Content.ReadAsAsync<PrebookValidationResponse>().ConfigureAwait(false);
+                    return result;
+                }
+
+                result.Error = response.Content.ReadAsAsync<ErrorResponse>().Result;
+
+                return result;
+            }
+            catch (Exception e)
+            {
+                throw new HttpRequestException($"{nameof(ValidatePrebook)} failed", e);
+            }
         }
     }
 }

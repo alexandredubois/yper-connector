@@ -2,6 +2,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using YperConnector;
+using YperConnector.Models.Prebook.Request;
 
 namespace YperConnectorTests
 {
@@ -28,7 +29,32 @@ namespace YperConnectorTests
         {
             string retailPointId = _config.GetSection("credentials")["defaultRetailPoint"];
             var apiInstance = GetYperApiInstance();
-            var result = apiInstance.Booking.Prebook(new YperConnector.Models.Prebook.Request.PrebookRequest
+            var result = apiInstance.Booking.Prebook(GetDummyPrebookForTomorrow(retailPointId));
+
+            var finalResult = result.Result;
+            Assert.IsNotNull(finalResult);
+            Assert.IsNotNull(finalResult.Data);
+            Assert.IsNull(finalResult.Error);
+            Assert.IsFalse(string.IsNullOrEmpty(finalResult.Data.Result.PrebookId));
+        }
+
+        [TestMethod]
+        public void ValidatePrebook_BasicRequestForTomorrow_Success()
+        {
+            string retailPointId = _config.GetSection("credentials")["defaultRetailPoint"];
+            var apiInstance = GetYperApiInstance();
+            var prebookResult = apiInstance.Booking.Prebook(GetDummyPrebookForTomorrow(retailPointId));
+
+            var prebookRequestSuccess = prebookResult.Result.Data;
+            var result = apiInstance.Booking.ValidatePrebook(prebookRequestSuccess.Result.PrebookId).Result;
+            Assert.IsNotNull(result);
+            Assert.IsNull(result.Error);
+            Assert.IsFalse(string.IsNullOrEmpty(result.Data.Result.MissionId));
+        }
+
+        private static PrebookRequest GetDummyPrebookForTomorrow(string retailPointId)
+        {
+            return new YperConnector.Models.Prebook.Request.PrebookRequest
             {
                 Order = new YperConnector.Models.Prebook.Request.Order
                 {
@@ -53,13 +79,7 @@ namespace YperConnectorTests
                     Type = "retailpoint",
                     Id = retailPointId
                 }
-            }) ;
-
-            var finalResult = result.Result;
-            Assert.IsNotNull(finalResult);
-            Assert.IsNotNull(finalResult.Data);
-            Assert.IsNull(finalResult.Error);
-            Assert.IsFalse(string.IsNullOrEmpty(finalResult.Data.Result.PrebookId));
+            };
         }
 
         private YperApi GetYperApiInstance()
