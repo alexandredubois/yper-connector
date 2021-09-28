@@ -1,7 +1,10 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+    <PackageId>YperConnector</PackageId>
+    <Authors>Alexandre Dubois</Authors>
+    <Company>Objectif 33 SAS</Company>
   </PropertyGroup>
 
   <ItemGroup>
