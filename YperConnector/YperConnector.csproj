@@ -5,6 +5,11 @@
     <PackageId>YperConnector</PackageId>
     <Authors>Alexandre Dubois</Authors>
     <Company>Objectif 33 SAS</Company>
+    <Description>
+      This client library enables working with Yper delivery service.
+      Project repository and documentation - https://github.com/alexandredubois/yper-connector
+      Yper website - https://www.yper.fr/
+    </Description>
   </PropertyGroup>
 
   <ItemGroup>
