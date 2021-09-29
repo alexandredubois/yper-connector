@@ -8,6 +8,7 @@
     <Description>
       This client library enables working with Yper delivery service.
       Project repository and documentation - https://github.com/alexandredubois/yper-connector
+      Yper API Documentation - https://yper.stoplight.io/docs/ypercore-documentation-public/docs/1%20-%20Before%20starting/0-overview.md
       Yper website - https://www.yper.fr/
     </Description>
   </PropertyGroup>
