@@ -22,5 +22,11 @@ namespace YperConnector.Models.Prebook.Request
 
         [JsonProperty("order")]
         public Order Order;
+
+        [JsonProperty("comment")]
+        public string Comment { get; set; }
+
+        [JsonProperty("extra")]
+        public Extra Extra { get; set; }
     }
 }
