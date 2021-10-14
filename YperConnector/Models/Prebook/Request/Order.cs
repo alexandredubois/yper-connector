@@ -1,5 +1,4 @@
 ﻿using Newtonsoft.Json;
-using System.Text.Json.Serialization;
 
 namespace YperConnector.Models.Prebook.Request
 {
@@ -9,7 +8,6 @@ namespace YperConnector.Models.Prebook.Request
         public string OrderId;
 
         [JsonProperty("transport_type")]
-        [Newtonsoft.Json.JsonConverter(typeof(JsonStringEnumConverter))]
         public TransportType TransportType { get; set; }
     }
 }
