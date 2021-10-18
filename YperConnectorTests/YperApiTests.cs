@@ -54,19 +54,20 @@ namespace YperConnectorTests
 
         private static PrebookRequest GetDummyPrebookForTomorrow(string retailPointId)
         {
-            return new YperConnector.Models.Prebook.Request.PrebookRequest
+            return new PrebookRequest
             {
-                Order = new YperConnector.Models.Prebook.Request.Order
+                Order = new Order
                 {
-                    OrderId = Guid.NewGuid().ToString()
+                    OrderId = Guid.NewGuid().ToString(),
+                    TransportType = TransportType.bike //foot, bike, moto, car or break
                 },
-                DeliveryAddress = new YperConnector.Models.Prebook.Request.DeliveryAddress
+                DeliveryAddress = new DeliveryAddress
                 {
                     FormattedAddress = "226 Cours de la Marne, 33800 BORDEAUX"
                 },
                 DeliveryStart = DateTime.Now.AddDays(1),
                 DeliveryEnd = DateTime.Now.AddDays(1).AddHours(2),
-                Receiver = new YperConnector.Models.Prebook.Request.Receiver
+                Receiver = new Receiver
                 {
                     Email = "test@alexandredubois.com",
                     Firstname = "Alexandre",
@@ -74,11 +75,12 @@ namespace YperConnectorTests
                     Phone = "+33612345678",
                     Type = "user"
                 },
-                Sender = new YperConnector.Models.Prebook.Request.Sender
+                Sender = new Sender
                 {
                     Type = "retailpoint",
                     Id = retailPointId
-                }
+                },
+                Comment = "This delivery contains a bottle of wine. Handle it carefully."
             };
         }
 
